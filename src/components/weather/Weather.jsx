@@ -2,14 +2,14 @@ import { useState } from "react";
 import Search from "../search/Search";
 import { useEffect } from "react";
 
-const API_KEY = "3284c543f67ace08e4b902359a4d606a";
-
 //https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
 export default function Weather() {
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
+
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   async function fetchWeatherData(param) {
     setIsLoading(true);
@@ -19,7 +19,6 @@ export default function Weather() {
       );
       const data = await response.json();
 
-      console.log(data);
       if (data) {
         setWeatherData(data);
         setIsLoading(false);
